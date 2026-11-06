@@ -1,0 +1,464 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Susanna Bartoletti, senior product designer.">
+<title>Susanna Bartoletti</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap">
+<style>
+/* Layout: white, image-led two-column index with small captions (Lotta Nieminen-like restraint). Roboto throughout. One plum, used sparingly, plus warm tints and no decorative shapes. Deliberately one light look. Own palette: deep wine with light blue and soft neutrals, no decorative shapes. */
+:root{
+  --bg:#FFFFFF; --fg:#1F1A1C; --muted:#75696D; --line:#ECE6E3;
+  --plum:#6A1F2E; --salmon:#88B8E4; --blush:#D6E7F7; --blue-ink:#1F4A73; --beige:#F8DFE8; --pink:#F8DFE8; --cream:#F8F6F5;
+  --sans:"Roboto", "Helvetica Neue", Arial, sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{background:var(--bg); color:var(--fg); font-family:var(--sans); font-size:16px; line-height:1.55; -webkit-font-smoothing:antialiased}
+.wrap{max-width:1280px; margin:0 auto;
+  padding-left:max(24px, env(safe-area-inset-left, 0px)); padding-right:max(24px, env(safe-area-inset-right, 0px))}
+a{color:inherit}
+a:focus-visible,button:focus-visible{outline:2px solid var(--plum); outline-offset:3px}
+h1,h2,h3,p{margin:0}
+h1,h2{text-wrap:balance}
+p,dd,.cap p,.dot span{text-wrap:pretty}
+
+/* header */
+header .wrap{display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap; padding-block:28px}
+.name{display:flex; align-items:center; gap:10px; font-weight:500; text-decoration:none; font-size:15px}
+nav{display:flex; gap:28px; font-size:15px}
+nav a{text-decoration:none; color:var(--muted)}
+nav a:hover{color:var(--plum)}
+
+/* intro */
+.intro .wrap{display:grid; grid-template-columns:minmax(0,max-content) auto; justify-content:space-between; gap:56px; align-items:center; padding-block:56px 96px}
+.intro h1{font-weight:300; font-size:clamp(30px, 4.2vw, 54px); line-height:1.15; letter-spacing:-0.015em; max-width:27ch; position:relative; z-index:1}
+.intro h1 a{font-weight:400; color:var(--plum); text-decoration:underline; text-decoration-color:var(--salmon); text-decoration-thickness:0.12em; text-underline-offset:0.2em; text-decoration-skip-ink:none}
+
+/* chapter heads */
+.chapter{display:grid; grid-template-columns:220px minmax(0,1fr); gap:12px 40px; padding-block:22px 44px; border-top:1px solid var(--fg)}
+.chapter .k{font-size:15px; font-weight:500}
+.chapter .k span{display:block; color:var(--muted); font-weight:400}
+.chapter p{max-width:60ch; font-size:18px; font-weight:300; line-height:1.55}
+.stats{display:flex; gap:48px; flex-wrap:wrap}
+.tile.split{display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:stretch}
+.tile.split .media{aspect-ratio:4/3}
+.side{display:flex; flex-direction:column; justify-content:space-between; gap:40px; min-width:0; height:100%; padding-top:8px}
+.stat b{font-size:clamp(40px,4.4vw,60px) !important}
+.stat b{display:block; font-size:36px; font-weight:400; letter-spacing:-0.02em; color:var(--plum); font-variant-numeric:tabular-nums; line-height:1}
+.tile .stat b{text-decoration:underline; text-decoration-color:var(--salmon); text-decoration-thickness:0.08em; text-underline-offset:0.16em; text-decoration-skip-ink:none; padding-bottom:0.12em}
+.stat span{display:block; margin-top:6px; font-size:14px; color:var(--muted)}
+
+.subhead{display:flex; flex-wrap:wrap; justify-content:space-between; align-items:baseline; gap:16px; margin:24px 0 28px; padding-bottom:12px; border-bottom:1px solid var(--line)}
+.subhead h2{font-size:clamp(22px,2.4vw,30px); font-weight:300; letter-spacing:-0.01em}
+.subhead span{font-size:14px; color:var(--plum); font-variant-numeric:tabular-nums}
+.key{display:flex; flex-wrap:wrap; gap:6px; list-style:none; margin:0; padding:0}
+.key li{font-size:12.5px; font-weight:500; padding:3px 11px; border-radius:999px; background:var(--pink); color:var(--plum)}
+.key li.m{background:var(--blush)}
+/* index grid */
+.index{display:grid; grid-template-columns:1fr 1fr; gap:64px 24px; padding-bottom:120px}
+.tile{min-width:0}
+.tile.wide{grid-column:1 / -1}
+.media{position:relative; overflow:hidden; aspect-ratio:4/3; max-width:100%}
+.tile.wide .media{aspect-ratio:16/8}
+.tile.tall .media{aspect-ratio:4/5}
+.tile.feature .media{aspect-ratio:16/9}
+.below{display:grid; grid-template-columns:1fr auto; gap:24px 48px; align-items:start; margin-top:20px}
+.below .cap{margin-top:0}
+.below .cap h3{font-size:20px}
+.below .cap p{font-size:16px}
+@media (max-width:760px){.below{grid-template-columns:1fr}}
+@media (max-width:600px){.out{flex-direction:column; align-items:flex-start; gap:6px}}
+.media img{display:block; width:100%; height:100%; object-fit:cover; transition:transform .6s ease}
+.tile:hover .media img{transform:scale(1.025)}
+.ph{display:grid; place-items:center; text-align:center; padding:24px; height:100%; color:rgba(31,26,28,.55); font-size:14px}
+.ph b{display:block; font-weight:500; color:rgba(31,26,28,.8); margin-bottom:2px}
+.ph span{max-width:32ch; position:relative; z-index:1}
+.t-beige,.t-blush,.t-cream,.t-plum{background:var(--blush)}
+
+.shape{position:absolute; pointer-events:none}
+.cap{display:grid; grid-template-columns:1fr auto; gap:4px 16px; margin-top:14px; align-items:baseline}
+.cap h3{font-size:16px; font-weight:500}
+.cap .who{font-size:14px; color:var(--muted); text-align:right}
+.cap p + p{margin-top:6px}
+.cap p{grid-column:1 / -1; color:var(--muted); font-size:15px; max-width:58ch}
+.out{grid-column:1 / -1; display:flex; flex-wrap:wrap; gap:6px 20px; list-style:none; padding:0; margin:10px 0 0}
+.out li{font-size:14px; font-weight:500; color:var(--plum); text-decoration:underline; text-decoration-color:var(--salmon); text-decoration-thickness:0.14em; text-underline-offset:0.3em; text-decoration-skip-ink:none}
+.tags{grid-column:1 / -1; display:flex; flex-wrap:wrap; gap:6px; list-style:none; padding:0; margin:8px 0 0}
+.tags li{font-size:12.5px; font-weight:500; padding:3px 11px; border-radius:999px; background:var(--blush); color:var(--plum)}
+
+/* process */
+#process .lead{max-width:60ch; font-size:18px; font-weight:300}
+.loop{display:grid; grid-template-columns:repeat(4,1fr); gap:24px}
+.step{min-width:0; padding-top:16px; border-top:1px solid var(--line)}
+.step .sh{display:flex; align-items:center; gap:14px}
+.step .ico{flex:none; width:46px; height:46px; border-radius:50%; display:grid; place-items:center; color:var(--plum); transition:transform .4s cubic-bezier(.3,1.4,.5,1)}
+.step .ico svg{width:22px; height:22px}
+.step .i-pink{background:var(--pink)} .step .i-blue{background:var(--blush)}
+.step:hover .ico{transform:rotate(-8deg) scale(1.08)}
+.step .n{font-size:13px; color:var(--plum); font-variant-numeric:tabular-nums}
+.step h3{font-size:20px; font-weight:500}
+.step p{margin-top:12px; color:var(--muted); font-size:15px}
+.loopback{position:relative; margin-top:14px; height:60px; color:var(--salmon)}
+.loopback svg{position:absolute; inset:0; width:100%; height:100%}
+.loopback::before{content:""; position:absolute; left:calc(4% - 5px); top:2px; border:6px solid transparent; border-bottom:9px solid var(--salmon); border-top:0}
+.loopback span{position:absolute; left:50%; bottom:38px; transform:translateX(-50%); background:var(--bg); padding:0 12px; font-size:14px; color:var(--plum); white-space:nowrap; top:38px; bottom:auto}
+.loop .step{position:relative}
+.loop .step:not(:last-child)::after{content:"→"; position:absolute; right:-18px; top:30px; color:var(--salmon); font-size:16px}
+.mix{margin-top:8px; padding:40px; background:var(--cream); border-radius:28px}
+.mix-top{display:flex; justify-content:space-between; align-items:end; gap:16px 32px; flex-wrap:wrap}
+.mix-top h3{font-size:20px; font-weight:500}
+.mix-top p{color:var(--muted); font-size:15px; margin-top:4px}
+.switch{display:flex; flex-wrap:wrap; gap:6px}
+.switch button{font:inherit; font-size:14px; cursor:pointer; padding:7px 14px; border-radius:999px; border:1px solid var(--line); background:var(--bg); color:var(--fg)}
+.switch button:hover{border-color:var(--plum)}
+.switch button[aria-pressed="true"]{background:var(--plum); border-color:var(--plum); color:var(--cream)}
+.dots{display:grid; grid-template-columns:repeat(4,1fr); gap:24px; margin-top:44px; align-items:end}
+.dot{display:flex; flex-direction:column; align-items:center; gap:12px; text-align:center; min-width:0}
+.dot .cw{height:104px; display:grid; place-items:center}
+.dot .c{width:var(--s,70px); aspect-ratio:1; max-width:100%; border-radius:50%; display:grid; place-items:center; color:var(--plum); transition:width .5s cubic-bezier(.3,1.4,.5,1), background .4s, color .4s}
+.dot .c svg{width:44%; height:44%}
+.dot[data-l="3"] .c{--s:100px; background:var(--plum); color:var(--pink)}
+.dot[data-l="2"] .c{--s:70px; background:var(--salmon)}
+.dot[data-l="1"] .c{--s:50px; background:var(--pink)}
+.legend{display:flex; gap:20px; flex-wrap:wrap; margin-top:28px; font-size:13px; color:var(--muted)}
+.legend i{display:inline-block; width:10px; height:10px; border-radius:50%; margin-right:6px; vertical-align:-1px}
+.dot b{font-size:15px; font-weight:500}
+.dot span{display:block; font-size:13px; color:var(--muted)}
+.mix-why{margin-top:36px; font-size:20px; font-weight:300; max-width:48ch}
+#process{padding-bottom:120px}
+
+/* clickable tiles */
+a.tile{display:block; text-decoration:none; color:inherit; cursor:pointer}
+a.tile.split{display:grid}
+.view{position:absolute; left:50%; top:50%; transform:translate(-50%,-30%); opacity:0; background:var(--plum); color:var(--cream); font-size:14px; padding:10px 18px; border-radius:999px; transition:opacity .3s, transform .4s cubic-bezier(.2,.8,.2,1); pointer-events:none}
+
+a.tile:hover .view, a.tile:focus-visible .view{opacity:1; transform:translate(-50%,-50%)}
+a.tile .ph{transition:transform .6s cubic-bezier(.2,.8,.2,1), opacity .4s}
+a.tile:hover .ph{transform:scale(1.04); opacity:.35}
+a.tile:focus-visible{outline:2px solid var(--plum); outline-offset:6px}
+
+/* case view */
+.case-view{position:fixed; inset:0; z-index:50; background:var(--bg); overflow-y:auto; transform:translateY(40px); opacity:0; transition:transform .45s cubic-bezier(.2,.8,.2,1), opacity .35s}
+.case-view.open{transform:none; opacity:1}
+.case-bar{position:sticky; top:0; z-index:2; background:var(--bg); border-bottom:1px solid var(--line); padding-top:env(safe-area-inset-top, 0px)}
+.case-bar .wrap{display:flex; justify-content:space-between; align-items:center; padding-block:18px; font-size:14px; color:var(--muted)}
+.case-close{text-decoration:none; color:var(--fg); font-weight:500}
+.case-close:hover{color:var(--plum)}
+.case-wrap{padding-block:56px 96px}
+.case-head h1{font-weight:300; font-size:clamp(34px,5vw,64px); line-height:1.08; letter-spacing:-0.02em; max-width:18ch}
+.case-head p{margin-top:18px; font-size:20px; font-weight:300; color:var(--muted); max-width:48ch}
+.case-hero{margin-top:48px; aspect-ratio:16/8}
+.case-view .stats{margin-top:40px; gap:56px}
+.case-grid{display:grid; grid-template-columns:220px minmax(0,1fr); gap:40px; margin-top:56px; padding-top:24px; border-top:1px solid var(--fg)}
+.case-grid dl{margin:0; font-size:15px}
+.case-grid dt{color:var(--muted); font-size:13px}
+.case-grid dd{margin:2px 0 16px}
+.case-grid .tags{margin-top:8px}
+.case-text{max-width:64ch}
+.case-text h2{font-size:15px; font-weight:500; color:var(--plum); margin-top:28px}
+.case-text h2:first-child{margin-top:0}
+.case-text p{margin-top:8px; font-size:18px; font-weight:300; line-height:1.6}
+.case-pair{display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:64px}
+.case-pair .media:has(img){box-shadow:0 2px 4px rgba(31,74,115,.06), 0 16px 40px rgba(31,74,115,.14)}
+.case-next{display:flex; justify-content:space-between; align-items:baseline; gap:16px; flex-wrap:wrap; margin-top:80px; padding-top:24px; border-top:1px solid var(--fg); text-decoration:none; color:inherit}
+.case-next span{font-size:14px; color:var(--muted)}
+.case-next b{font-weight:300; font-size:clamp(22px,3vw,36px); transition:color .2s}
+.case-next:hover b{color:var(--plum)}
+.case-view.open .r{animation:rise .7s cubic-bezier(.2,.8,.2,1) both}
+.case-view.open .r:nth-child(2){animation-delay:.08s} .case-view.open .r:nth-child(3){animation-delay:.16s} .case-view.open .r:nth-child(4){animation-delay:.24s} .case-view.open .r:nth-child(5){animation-delay:.3s}
+@keyframes rise{from{opacity:0; transform:translateY(24px)} to{opacity:1; transform:none}}
+@media (max-width:860px){ .case-grid{grid-template-columns:1fr} }
+@media (max-width:600px){ .case-pair{grid-template-columns:1fr} .case-hero{aspect-ratio:4/3} .case-view .stats{gap:28px} }
+@media (prefers-reduced-motion: reduce){ .case-view,.case-view.open .r{animation:none; transform:none} }
+/* about */
+.about{padding-bottom:120px}
+.portrait{position:relative; width:clamp(220px,30vw,400px); max-width:100%; aspect-ratio:1; border-radius:50%; overflow:hidden; background:var(--salmon)}
+.portrait img{width:100%; height:100%; object-fit:cover; filter:grayscale(1)}
+.about-text{display:grid; grid-template-columns:1fr 2fr; gap:48px; min-width:0}
+.about-text > div{min-width:0}
+.about-text p{font-size:18px; font-weight:300; max-width:44ch}
+.about-text h3{font-size:15px; font-weight:500; margin-bottom:12px}
+.block + .block{margin-top:32px}
+.cv{list-style:none; margin:0; padding:0; font-size:15px}
+.cv li{padding:10px 0; border-top:1px solid var(--line); display:grid; grid-template-columns:1fr auto; gap:2px 12px}
+.cv li span{color:var(--muted)}
+.cv .yr{color:var(--muted); font-variant-numeric:tabular-nums; text-align:right}
+.skills{font-size:15px !important; color:var(--muted); line-height:1.7; font-weight:400 !important}
+.skills + .skills{margin-top:10px}
+
+/* footer */
+footer{background:var(--plum); color:var(--cream); position:relative; overflow:hidden}
+footer .wrap{position:relative; z-index:1; padding-block:88px 64px}
+footer h2{font-weight:300; font-size:clamp(28px,3.6vw,46px); max-width:16ch; line-height:1.15}
+.contact{list-style:none; padding:0; margin:40px 0 0; display:flex; gap:12px 40px; flex-wrap:wrap; font-size:16px}
+.contact a{color:var(--cream); text-decoration:none; border-bottom:1px solid rgba(248,246,245,.45); overflow-wrap:anywhere}
+.contact a:hover{border-color:var(--cream)}
+.fine{margin-top:72px; font-size:13px; color:rgba(248,246,245,.7)}
+
+@media (max-width:860px){
+  .chapter{grid-template-columns:1fr}
+  .tile.split{grid-template-columns:1fr; gap:20px}
+  .loop{grid-template-columns:1fr 1fr}
+  .about,.about-text{grid-template-columns:1fr}
+  
+  .dot[data-l="3"] .c{--s:80px} .dot[data-l="2"] .c{--s:60px} .dot[data-l="1"] .c{--s:42px} .dot .cw{height:84px}
+  }
+@media (max-width:600px){
+  .wrap{padding-left:max(16px, env(safe-area-inset-left, 0px)); padding-right:max(16px, env(safe-area-inset-right, 0px))}
+  nav{gap:18px}
+  .intro .wrap{padding-block:40px 64px}
+  .intro .wrap{grid-template-columns:1fr; gap:32px; justify-content:stretch}
+  .intro .portrait{order:-1; width:160px}
+  .index{grid-template-columns:1fr; gap:48px}
+  .tile.wide .media,.tile.tall .media{aspect-ratio:4/3}
+  .loop{grid-template-columns:1fr}
+  .loopback{display:none}
+  .loop .step::after{display:none}
+  .mix{padding:24px}
+  .dots{grid-template-columns:1fr 1fr; gap:32px 16px}
+  .cap{grid-template-columns:1fr} .cap .who{text-align:left}
+  }
+@media (prefers-reduced-motion: reduce){ *{transition:none !important} }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="name" href="#top">Susanna Bartoletti</a>
+    <nav aria-label="Main">
+      <a href="#work">Work</a>
+      <a href="#process">Process</a>
+      <a href="#about">About</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="intro">
+    <div class="wrap">
+      <h1>Product designer in Stockholm, taking products from the first why to a shipped solution. Currently leading design at <a href="#work">Din Psykolog</a>.</h1>
+      <div class="portrait"><img src="web/susanna.webp" alt="Portrait of Susanna Bartoletti"></div>
+    </div>
+  </div>
+
+  <!-- DIN PSYKOLOG -->
+  <div class="wrap" id="work">
+    <div class="chapter">
+      <div class="k">Din Psykolog<span>Product Designer, 2024 to now</span></div>
+      <div>
+        <p>Leading design from strategy to finished product and guiding stakeholders and leadership toward decisions grounded in insights and business value. Responsible for making design carry through the product team, the wider organisation and our external presence, in daily close collaboration with our psychologists.</p>
+      </div>
+    </div>
+
+    <div class="subhead"><h2>Selected projects</h2></div>
+    <div class="index dp">
+      <a class="tile wide feature" href="#icbt" aria-label="Open project Launching our own iCBT programs"><div class="media t-plum"><img src="web/dp-icbt-hero.webp" alt="iCBT program views"><span class="view">View project</span></div><div class="below"><div class="cap"><h3>Launching our own iCBT programs</h3><p>Eight iCBT programs moved into our own service and launched within six months.</p></div><div class="stats"><div class="stat"><b>1.5 MSEK</b><span>saved per year</span></div><div class="stat"><b>+15%</b><span>journal generation</span></div></div></div></a>
+      <a class="tile" href="#caregiver" aria-label="Open project New caregiver platform"><div class="media t-cream"><img src="web/dp-caregiver-home.webp" alt="Caregiver platform home view" style="object-position:left top"><span class="view">View project</span></div><div class="cap"><h3>New caregiver platform</h3><p>A platform built around a psychologist's working day.</p><ul class="out"><li>Less admin</li><li>More time for patient care</li></ul></div></a>
+      <a class="tile" href="#patient" aria-label="Open project New patient platform and services"><div class="media t-blush"><img src="web/dp-patient-collage.webp" alt="Patient platform mobile views"><span class="view">View project</span></div><div class="cap"><h3>New patient platform and services</h3><p>A new patient journey that guides patients through their whole treatment.</p><ul class="out"><li>Higher conversion and retention</li></ul></div></a>
+      <a class="tile" href="#brand" aria-label="Open project Brand and website"><div class="media t-blush"><img src="web/dp-brand-subway.webp" alt="Din Psykolog campaign in the Stockholm metro"><span class="view">View project</span></div><div class="cap"><h3>Brand and website</h3><p>A warm yet professional brand that grew from a visual guideline into a full brand platform.</p><ul class="out"><li>Building brand awareness</li><li>A coherent brand across every touchpoint</li></ul></div></a>
+      <a class="tile" href="#design-system" aria-label="Open project Design system and design organisation"><div class="media t-beige"><img src="web/dp-ds-colors.webp" alt="Colour foundations in the design system"><span class="view">View project</span></div><div class="cap"><h3>Design system and design organisation</h3><p>A design practice and a shared design system, built step by step from scratch.</p><ul class="out"><li>Insight-driven organisation</li><li>Building the right thing in the right way</li></ul></div></a>
+    </div>
+
+  </div>
+  <!-- PROCESS -->
+  <section id="process" class="wrap">
+      <div class="chapter">
+        <div class="k">My process<span>Design thinking, prioritised</span></div>
+        <div><p class="lead">Design thinking is the foundation. From there the method is adapted to the type of project, the time available and what we want to achieve. What never changes is working from insights, whether they come from interviews, data or a quick test.</p></div>
+      </div>
+      <div class="mix">
+        <div class="mix-top">
+          <div><h3>Every project gets its own mix</h3><p>Pick a situation and see how the weight shifts.</p></div>
+          <div class="switch" role="group" aria-label="Situation">
+            <button type="button" id="mix-new" data-mix="new" aria-pressed="true">New service</button>
+            <button type="button" id="mix-fix" data-mix="fix" aria-pressed="false">Small fix</button>
+            <button type="button" id="mix-rush" data-mix="rush" aria-pressed="false">Tight deadline</button>
+            <button type="button" id="mix-fast" data-mix="fast" aria-pressed="false">Early idea, test fast</button>
+            <button type="button" id="mix-explore" data-mix="explore" aria-pressed="false">Early idea, research first</button>
+          </div>
+        </div>
+        <div class="dots" id="dots"></div>
+        <p class="mix-why" id="mix-why"></p>
+      </div>
+  </section>
+
+  <div class="wrap">
+    <!-- EARLIER -->
+    <div class="chapter">
+      <div class="k">Earlier work<span>Consulting, 2021 to 2024</span></div>
+      <div><p>Service, UX and UI design, from user research to hi-fi designs, always connecting business value with user needs.</p></div>
+    </div>
+
+    <div class="index">
+      <article class="tile">
+        <div class="media"><img src="web/wayout.webp" alt="Wayout Water dashboard on a tablet"></div>
+        <div class="cap"><h3>Digital dashboard</h3><div class="who">Wayout Water</div>
+          <p>Led the shift to a user-driven dashboard, defining strategy, goals and roadmap for the MVP.</p>
+          <ul class="tags"><li>Product strategy</li><li>UX</li><li>UI</li></ul></div>
+      </article>
+      <article class="tile">
+        <div class="media"><img src="web/svt.webp" alt="A year with SVT website"></div>
+        <div class="cap"><h3>A year with SVT</h3><div class="who">SVT</div>
+          <p>The interactive public service report, with a new menu and user flow through quick Lean UX iterations.</p>
+          <ul class="tags"><li>UX</li><li>UI</li><li>User research</li><li>User testing</li></ul></div>
+      </article>
+      <article class="tile">
+        <div class="media"><img src="web/vision.webp" alt="Vision member portal on laptop and phone"></div>
+        <div class="cap"><h3>My pages</h3><div class="who">Vision</div>
+          <p>A rebuilt member portal for the union, with simpler flows that took load off customer service. Design lead for the team.</p>
+          <ul class="tags"><li>UX</li><li>UI</li><li>Design lead</li></ul></div>
+      </article>
+      <article class="tile">
+        <div class="media"><img src="web/diplocs.webp" alt="Diplocs payment interface"></div>
+        <div class="cap"><h3>Omnichannel payments</h3><div class="who">Diplocs</div>
+          <p>A new white label payment service linking store and e-commerce, built from scratch with its own design system and an extended visual identity.</p>
+          <ul class="tags"><li>UX</li><li>UI</li><li>User testing</li><li>Design system</li><li>Visual identity</li></ul></div>
+      </article>
+      <article class="tile">
+        <div class="media"><img src="web/sveriges-ingenjorer.webp" alt="Sveriges Ingenjörer service screens"></div>
+        <div class="cap"><h3>Support for elected representatives</h3><div class="who">Sveriges Ingenjörer</div>
+          <p>A digital service helping new union representatives get started, built through interviews, concepts and usability tests.</p>
+          <ul class="tags"><li>Service design</li><li>Interviews</li><li>User testing</li></ul></div>
+      </article>
+      <article class="tile">
+        <div class="media"><img src="web/finansforbundet.webp" alt="Finansförbundet service concepts"></div>
+        <div class="cap"><h3>Digital service development</h3><div class="who">Finansförbundet</div>
+          <p>Member research that turned into customer journeys and a clear direction for new digital services.</p>
+          <ul class="tags"><li>Service design</li><li>Interviews</li><li>Customer journeys</li></ul></div>
+      </article>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="wrap">
+      <div class="chapter">
+        <div class="k">About<span>This is me</span></div>
+        <div></div>
+      </div>
+      <div class="about">
+        <div class="about-text">
+          <div>
+            <p>Senior product designer with a strong sense for both strategy and craft. Taking products from the first why to a shipped solution, guiding stakeholders toward decisions that create real value while still loving the details of the design. Currently designing digital healthcare together with clinicians, with data and AI as a natural part of everyday work.</p>
+          </div>
+          <div>
+            <div class="block">
+              <h3>Experience</h3>
+              <ol class="cv">
+                <li><div>Product Designer<br><span>Din Psykolog</span></div><div class="yr">2024–</div></li>
+                <li><div>Digital Designer<br><span>EGGS, part of Sopra Steria</span></div><div class="yr">2022–2024</div></li>
+                <li><div>Business Developer and Product Owner<br><span>Netlight</span></div><div class="yr">2021–2022</div></li>
+                <li><div>User Researcher<br><span>C2 Management</span></div><div class="yr">2021</div></li>
+                <li><div>M.Sc. Design and Product Development<br><span>Linköping University</span></div><div class="yr">2016–2021</div></li>
+              </ol>
+            </div>
+            <div class="block">
+              <h3>Skills</h3>
+              <p class="skills">Design leadership, product strategy, stakeholder guidance, design systems, brand and visual identity, UI design, user research and insights, A/B testing, data-driven decision making, AI workflows and automation, rapid prototyping, accessibility, usability testing</p>
+              <p class="skills">Daily tools include Figma, Claude, PostHog, Linear, Slack and Miro</p>
+            </div>
+            <div class="block">
+              <h3>Languages</h3>
+              <p class="skills">Swedish, native. English, fluent. Italian, basic.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <h2>Always happy to talk<br>design and product.</h2>
+    <ul class="contact">
+      <li><a href="mailto:susannabartoletti@gmail.com">susannabartoletti@gmail.com</a></li>
+      <li><a href="https://www.linkedin.com/in/susanna-bartoletti" target="_blank" rel="noopener">LinkedIn</a></li>
+    </ul>
+    <p class="fine">Susanna Bartoletti · Stockholm</p>
+  </div>
+</footer>
+<script>
+window.noOrphans=function(root){
+  (root||document).querySelectorAll("p, h1, h2, h3, dd").forEach(function(el){
+    var w=document.createTreeWalker(el,NodeFilter.SHOW_TEXT), last=null, n;
+    while((n=w.nextNode())){ if(n.nodeValue.trim()) last=n; }
+    if(!last || last.nodeValue.indexOf("\u00A0")>-1) return; var v=last.nodeValue, i=v.trimEnd().lastIndexOf(" ");
+    if(i>0) last.nodeValue=v.slice(0,i)+"\u00A0"+v.slice(i+1);
+  });
+};
+noOrphans();
+</script>
+
+<div class="case-view" id="case-view" hidden role="dialog" aria-modal="true" aria-labelledby="case-title">
+  <div class="case-bar"><div class="wrap"><span id="case-count"></span><a href="#work" class="case-close" id="case-close">Close ✕</a></div></div>
+  <div id="case-body"></div>
+</div>
+<script>window.CASES=[{"id": "icbt", "title": "Launching our own iCBT programs", "tint": "t-plum", "wide": true, "summary": "Eight iCBT programs moved into our own service and launched within six months.", "stats": [["1.5 MSEK", "saved per year"], ["+15%", "journal generation"], ["8", "programs in six months"]], "role": "Product Designer, leading UX and insight work", "team": "Psychologists, operations, quality and tech", "tags": [["Content design", 0], ["MVP", 0], ["User testing", 0]], "start": "Patients and psychologists found it hard to switch to an external platform for iCBT, and we had no control over the content on either side. It was a clear pain point, and an expensive one.", "work": "Work started with the largest program, for worry and anxiety, followed by seven more. The project was cross-functional with psychologists, operations, quality and tech, led through insight work and tough MVP priorities. The UX centres on a clear program overview, short readable content and easy homework, without compromising treatment results.", "result": "All eight programs launched within six months. They save 1.5 MSEK a year, bring in new revenue and raised journal generation by 15 percent. They are clinically strong, well liked by both patients and psychologists, and keep improving after launch.", "imgs": ["web/dp-icbt-hero.webp", "web/dp-icbt-feedback.webp", "web/dp-icbt-slide.webp"]}, {"id": "caregiver", "title": "New caregiver platform", "tint": "t-cream", "summary": "A platform built around a psychologist's working day.", "role": "Product Designer and project lead", "team": "Psychologists and tech", "tags": [["Workflow design", 0], ["User testing", 0]], "start": "The caregiver platform covered the basic needs of our psychologists. The aim was to build on that foundation and turn it into a more flexible platform that makes their working day easier.", "work": "Research and conversations with psychologists mapped what a full working day requires. The first release brought clear to-do lists and an iCBT overview showing which patients need feedback, alongside schedule and journaling. A searchable patient list, chat search, new archiving logic and a summary page for each patient followed.", "result": "Today the platform supports the whole working day and shows what needs attention right now. Feedback keeps coming in, but now it is about small details rather than big gaps. New services such as private and couples therapy are shaped together with the psychologists to keep workload and cognitive load down.", "imgs": ["web/dp-caregiver-home.webp", "web/dp-caregiver-patient.webp", "web/dp-caregiver-done.webp"]}, {"id": "patient", "title": "New patient platform and services", "tint": "t-blush", "summary": "A new patient journey that guides patients through their whole treatment.", "role": "Product Designer and project lead", "team": "Product, tech and psychologists", "tags": [["Onboarding", 0], ["A/B tests", 0], ["Conversion", 0]], "start": "The old patient platform was minimal and rigid, with one path to follow and features added ad hoc over time. Most drop-outs happened during the first three sessions.", "work": "The goal was to get patients to stay for three visits. Surveys and research into why patients stay, rebook, cancel or leave laid the groundwork. Onboarding, booking and payment were rebuilt to raise conversion, with a matching flow that helps patients find the right psychologist and get the right information at the right time.", "result": "A warmer platform with clear guidance on where you are, what happens after a session and what comes next. The flow is now forgiving, letting patients move back and forth instead of following one fixed path. New services such as private and couples therapy are now built on top of it.", "imgs": ["web/dp-patient-collage.webp", "web/dp-patient-home.webp", "web/dp-patient-couples.webp"]}, {"id": "brand", "title": "Brand and website", "tint": "t-blush", "tall": true, "summary": "A warm yet professional brand that grew from a visual guideline into a full brand platform.", "role": "Visual Designer and brand strategy", "team": "Marketing, CEO and an agency", "tags": [["Brand platform", 0], ["Visual identity", 0], ["Tone of voice", 0]], "start": "The old brand was thin and built more on gut feeling than on who our users actually are.", "work": "Working with marketing, our CEO and an agency, I was the design eye in rebuilding the brand from scratch. The starting point was how we want to be perceived. Professional enough for healthcare, yet warm and welcoming, with a softer expression that still speaks to everyone. What began as a visual guideline has grown over one and a half years into a full brand platform with slides, tone of voice and social media, extended to a second private brand with its own look that clearly belongs to the same family.", "result": "A coherent brand builds recognition, and Din Psykolog has gone from a name few had heard of to one many people know. Today the visual expression, and how it carries through the products, is my responsibility.", "imgs": ["web/dp-brand-subway.webp", "web/dp-website.webp", "web/dp-private.webp"]}, {"id": "design-system", "title": "Design system and design organisation", "tint": "t-beige", "tall": true, "summary": "A design practice and a shared design system, built step by step from scratch.", "role": "Product Designer, building the design function", "team": "Product, tech and leadership", "tags": [["Design system", 0], ["Design leadership", 0]], "start": "There was no design function when I joined. The founders had built a lean platform with the core features in place, but quick additions over time had left a lot of zombie functionality.", "work": "Two things were built in parallel. The design system started from nothing in Figma, with colours, typography, icons and components gathered in one shared library, later extended to cover both brands. At the same time the insight work grew step by step, from surveys, PostHog and A/B tests to a Slack feedback channel with our psychologists and interviews before larger projects. Just as important has been building an understanding internally of why design matters, and always asking why before something gets built.", "result": "A continuous feedback loop and a design system used by both design and development, giving developers ready components and keeping the product consistent. That foundation is what made a project the size of the iCBT programs possible.", "imgs": ["web/dp-ds-colors.webp", "web/dp-ds-buttons.webp", "web/dp-ds-icons.webp"]}];</script>
+<script>
+(function(){
+  var C=window.CASES, view=document.getElementById("case-view"), body=document.getElementById("case-body"), count=document.getElementById("case-count");
+  window.addEventListener("load",function(){(window.CASES||[]).forEach(function(c){c.imgs.forEach(function(x){if(/\.(jpe?g|png|webp)$/.test(x)){var i=new Image();i.src=x;}});});});
+  function slot(x){return /\.(jpe?g|png|webp)$/.test(x)?'<img src="'+x+'" alt="">':'<div class="ph"><span><b>Image</b>'+x+'</span></div>';}
+  function tags(t){return '<ul class="tags">'+t.map(function(x){return '<li'+(x[1]?' class="m"':'')+'>'+x[0]+'</li>';}).join('')+'</ul>';}
+  function render(i){
+    var c=C[i], n=C[(i+1)%C.length];
+    count.textContent="Din Psykolog · "+String(i+1).padStart(2,"0")+" / "+String(C.length).padStart(2,"0");
+    var stats=c.stats?'<div class="stats r">'+c.stats.map(function(s){return '<div class="stat"><b>'+s[0]+'</b><span>'+s[1]+'</span></div>';}).join('')+'</div>':'';
+    body.innerHTML='<div class="wrap case-wrap">'+
+      '<header class="case-head r"><h1 id="case-title">'+c.title+'</h1><p>'+c.summary+'</p></header>'+
+      '<div class="media case-hero r '+c.tint+'">'+slot(c.imgs[0])+'</div>'+
+      stats+
+      '<div class="case-grid r"><aside><dl><dt>Role</dt><dd>'+c.role+'</dd><dt>Team</dt><dd>'+c.team+'</dd></dl></aside>'+
+      '<div class="case-text"><h2>Starting point</h2><p>'+c.start+'</p><h2>The work</h2><p>'+c.work+'</p><h2>Result</h2><p>'+c.result+'</p></div></div>'+
+      '<div class="case-pair r"><div class="media t-cream">'+slot(c.imgs[1])+'</div><div class="media t-blush">'+slot(c.imgs[2])+'</div></div>'+
+      '<a class="case-next r" href="#'+n.id+'"><span>Next project</span><b>'+n.title+' →</b></a></div>';
+    view.scrollTop=0; if(window.noOrphans) noOrphans(body);
+  }
+  var last=null;
+  function route(){
+    var id=location.hash.slice(1), i=C.findIndex(function(c){return c.id===id;});
+    if(i<0){ if(!view.hidden){view.classList.remove("open"); setTimeout(function(){view.hidden=true;},350); document.documentElement.style.overflow=""; if(last){var t=document.querySelector('a.tile[href="#'+last+'"]'); if(t) t.focus({preventScroll:false});}} return; }
+    last=id; render(i); view.hidden=false; view.scrollTop=0; document.documentElement.style.overflow="hidden";
+    document.getElementById("case-close").focus({preventScroll:true});
+    requestAnimationFrame(function(){view.scrollTop=0; requestAnimationFrame(function(){view.scrollTop=0; view.classList.add("open");});});
+    setTimeout(function(){view.scrollTop=0;},60);
+  }
+  document.addEventListener("keydown",function(e){ if(e.key==="Escape"&&!view.hidden){location.hash="work";} });
+  window.addEventListener("hashchange",route); route();
+})();
+</script>
+
+<script>
+(function(){
+  var steps=["Understand","Prioritise","Design and test","Ship and learn"];
+  var icons=[["i-pink", "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"11\" cy=\"11\" r=\"6.5\"/><path d=\"M16 16l4.5 4.5\"/><path d=\"M8.5 11a2.5 2.5 0 0 1 2.5-2.5\"/></svg>"], ["i-blue", "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M12 4v16\"/><path d=\"M5 20h14\"/><path d=\"M4 8h16\"/><path d=\"M6.5 8L4 14h5z\"/><path d=\"M17.5 8L15 14h5z\"/></svg>"], ["i-pink", "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 20l1.2-4.6L15.8 4.8a2 2 0 0 1 2.8 0l.6.6a2 2 0 0 1 0 2.8L8.6 18.8z\"/><path d=\"M14 6.6l3.4 3.4\"/></svg>"], ["i-blue", "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M20.5 3.5L3.5 10l7 3.5 3.5 7z\"/><path d=\"M20.5 3.5l-10 10\"/></svg>"]];
+  var words=["","A little","Medium","A lot"];
+  var mixes={
+    new:{l:[3,3,3,2],why:"A new service gets the full process. Deep research before anything is drawn, several rounds of testing and a careful launch."},
+    fix:{l:[1,1,1,3],why:"The data already shows the problem. Fix it, ship it the same week and follow the numbers."},
+    rush:{l:[1,3,2,3],why:"Lean on existing insights, test only the riskiest part and learn the rest after launch."},
+    fast:{l:[1,1,2,3],why:"Set a hypothesis, ship it as fast as possible and measure what happens."},
+    explore:{l:[3,2,3,1],why:"Research first and prototype widely. Nothing ships until it is clear it is worth building."}
+  };
+
+  var box=document.getElementById("dots"), why=document.getElementById("mix-why");
+  box.innerHTML=steps.map(function(s,i){return '<div class="dot"><b>'+s+'</b><div class="cw"><div class="c">'+icons[i][1]+'</div></div><span></span></div>';}).join("");
+  var cards=box.children, btns=document.querySelectorAll(".switch button");
+  function show(k){
+    var m=mixes[k];
+    for(var i=0;i<cards.length;i++){cards[i].setAttribute("data-l",m.l[i]); cards[i].querySelector("span").textContent=words[m.l[i]];}
+    why.textContent=m.why; if(window.noOrphans) noOrphans(why.parentNode);
+    btns.forEach(function(b){b.setAttribute("aria-pressed", b.dataset.mix===k?"true":"false");});
+  }
+  btns.forEach(function(b){b.addEventListener("click",function(){show(b.dataset.mix);});});
+  show("new");
+})();
+</script>
+</body>
+</html>
