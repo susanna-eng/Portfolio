@@ -152,6 +152,7 @@ a.tile:focus-visible{outline:2px solid var(--plum); outline-offset:6px}
 .case-head h1{font-weight:300; font-size:clamp(34px,5vw,64px); line-height:1.08; letter-spacing:-0.02em; max-width:18ch}
 .case-head p{margin-top:18px; font-size:20px; font-weight:300; color:var(--muted); max-width:48ch}
 .case-hero{margin-top:48px; aspect-ratio:16/8}
+.case-hero.fit{aspect-ratio:16/9}
 .case-view .stats{margin-top:40px; gap:56px}
 .case-grid{display:grid; grid-template-columns:220px minmax(0,1fr); gap:40px; margin-top:56px; padding-top:24px; border-top:1px solid var(--fg)}
 .case-grid dl{margin:0; font-size:15px}
@@ -172,7 +173,7 @@ a.tile:focus-visible{outline:2px solid var(--plum); outline-offset:6px}
 .case-view.open .r:nth-child(2){animation-delay:.08s} .case-view.open .r:nth-child(3){animation-delay:.16s} .case-view.open .r:nth-child(4){animation-delay:.24s} .case-view.open .r:nth-child(5){animation-delay:.3s}
 @keyframes rise{from{opacity:0; transform:translateY(24px)} to{opacity:1; transform:none}}
 @media (max-width:860px){ .case-grid{grid-template-columns:1fr} }
-@media (max-width:600px){ .case-pair{grid-template-columns:1fr} .case-hero{aspect-ratio:4/3} .case-view .stats{gap:28px} }
+@media (max-width:600px){ .case-pair{grid-template-columns:1fr} .case-hero{aspect-ratio:4/3} .case-hero.fit{aspect-ratio:16/9} .case-view .stats{gap:28px} }
 @media (prefers-reduced-motion: reduce){ .case-view,.case-view.open .r{animation:none; transform:none} }
 /* about */
 .about{padding-bottom:120px}
@@ -216,6 +217,7 @@ footer h2{font-weight:300; font-size:clamp(28px,3.6vw,46px); max-width:16ch; lin
   .intro .portrait{order:-1; width:160px}
   .index{grid-template-columns:1fr; gap:48px}
   .tile.wide .media,.tile.tall .media{aspect-ratio:4/3}
+  .tile.feature .media{aspect-ratio:16/9}
   .loop{grid-template-columns:1fr}
   .loopback{display:none}
   .loop .step::after{display:none}
@@ -414,7 +416,7 @@ noOrphans();
     var stats=c.stats?'<div class="stats r">'+c.stats.map(function(s){return '<div class="stat"><b>'+s[0]+'</b><span>'+s[1]+'</span></div>';}).join('')+'</div>':'';
     body.innerHTML='<div class="wrap case-wrap">'+
       '<header class="case-head r"><h1 id="case-title">'+c.title+'</h1><p>'+c.summary+'</p></header>'+
-      '<div class="media case-hero r '+c.tint+'">'+slot(c.imgs[0])+'</div>'+
+      '<div class="media case-hero r '+c.tint+(c.wide?' fit':'')+'">'+slot(c.imgs[0])+'</div>'+
       stats+
       '<div class="case-grid r"><aside><dl><dt>Role</dt><dd>'+c.role+'</dd><dt>Team</dt><dd>'+c.team+'</dd></dl></aside>'+
       '<div class="case-text"><h2>Starting point</h2><p>'+c.start+'</p><h2>The work</h2><p>'+c.work+'</p><h2>Result</h2><p>'+c.result+'</p></div></div>'+
